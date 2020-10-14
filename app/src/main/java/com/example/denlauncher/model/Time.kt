@@ -1,11 +1,13 @@
 package com.example.denlauncher.model
 
+import android.content.Context
 import com.example.denlauncher.TimeEventListener
 import com.example.denlauncher.TimeReceiver
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Time {
+    private val timeReceiver = TimeReceiver()
     private val modelListeners: MutableList<ModelEventListener> = mutableListOf()
     private var listener: TimeEventListener = object : TimeEventListener {
         override fun onTimeChanged() {
@@ -15,10 +17,14 @@ object Time {
 
     fun register(modelEventListener: ModelEventListener) {
         if (modelListeners.size == 0) {
-            TimeReceiver.register(listener)
+            timeReceiver.register(listener)
         }
         modelListeners.add(modelEventListener)
         updateTime()
+    }
+
+    fun startReceiver(context: Context) {
+        timeReceiver.startBroadcasting(context)
     }
 
     fun unregister(listener: ModelEventListener) {
@@ -41,6 +47,6 @@ object Time {
     }
 
     private fun releaseListener() {
-        TimeReceiver.unregister(listener)
+        timeReceiver.unregister(listener)
     }
 }
