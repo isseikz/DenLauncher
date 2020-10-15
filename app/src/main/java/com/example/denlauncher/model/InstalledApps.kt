@@ -25,7 +25,7 @@ object InstalledApps {
         notifyData()
     }
 
-    fun notifyData() {
+    private fun notifyData() {
         modelEventListeners.forEach {
             it.onUpdated(apps)
         }

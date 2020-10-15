@@ -7,7 +7,7 @@ import android.content.IntentFilter
 
 class TimeReceiver : BroadcastReceiver() {
     companion object {
-        val ACTIONS_LIST = listOf<String>(
+        val ACTIONS_LIST = listOf(
             Intent.ACTION_TIMEZONE_CHANGED,
             Intent.ACTION_TIME_TICK,
             Intent.ACTION_TIME_CHANGED
