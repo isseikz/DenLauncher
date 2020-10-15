@@ -36,6 +36,15 @@ class InstalledAppAdapter(
         holder.bind(getItem(position), viewLifecycleOwner, viewModel)
     }
 
+    override fun getItemCount(): Int {
+        val count = super.getItemCount()
+        return if (count > 5) {
+            5
+        } else {
+            count
+        }
+    }
+
     class AppNameViewHolder(
         private val binding: ItemInstalledAppsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
