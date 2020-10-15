@@ -6,6 +6,14 @@ import android.content.Intent
 import android.content.IntentFilter
 
 class TimeReceiver : BroadcastReceiver() {
+    companion object {
+        val ACTIONS_LIST = listOf<String>(
+            Intent.ACTION_TIMEZONE_CHANGED,
+            Intent.ACTION_TIME_TICK,
+            Intent.ACTION_TIME_CHANGED
+        )
+    }
+
     private val listeners: MutableList<TimeEventListener> = mutableListOf()
 
     fun register(listener: TimeEventListener) {
@@ -17,12 +25,17 @@ class TimeReceiver : BroadcastReceiver() {
     }
 
     fun startBroadcasting(context: Context) {
-        context.registerReceiver(this, IntentFilter("android.intent.action.TIME_SET"))
+        IntentFilter().also {
+            ACTIONS_LIST.forEach { action ->
+                it.addAction(action)
+            }
+            context.registerReceiver(this, it)
+        }
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
         intent?.let {
-            if (Intent.ACTION_TIME_CHANGED == it.action) {
+            if (ACTIONS_LIST.contains(it.action)) {
                 listeners.forEach { listener ->
                     listener.onTimeChanged()
                 }
