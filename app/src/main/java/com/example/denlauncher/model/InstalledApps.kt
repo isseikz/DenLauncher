@@ -20,7 +20,10 @@ object InstalledApps {
         apps = context.packageManager.getInstalledPackages(0).filter {
             it.applicationInfo.flags != ApplicationInfo.FLAG_SYSTEM
         }.map {
-            InstalledApp(it.applicationInfo.loadLabel(context.packageManager).toString())
+            InstalledApp(
+                it.applicationInfo.loadLabel(context.packageManager).toString(),
+                it.applicationInfo.packageName
+            )
         }
         notifyData()
     }
