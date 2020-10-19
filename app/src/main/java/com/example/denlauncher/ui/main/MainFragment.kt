@@ -20,7 +20,7 @@ class MainFragment : Fragment() {
     }
 
     private lateinit var binding: MainFragmentBinding
-    private val viewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
     private lateinit var installedAppAdapter: InstalledAppAdapter
 
     override fun onCreateView(
@@ -30,11 +30,11 @@ class MainFragment : Fragment() {
         initialize()
 
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
         binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = mainViewModel
             installedApps.layoutManager = LinearLayoutManager(context)
-            installedApps.adapter = InstalledAppAdapter(viewLifecycleOwner, viewModel!!).also {
+            installedApps.adapter = InstalledAppAdapter(viewLifecycleOwner, mainViewModel).also {
                 installedAppAdapter = it
             }
         }
@@ -44,7 +44,7 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.run {
+        mainViewModel.run {
             installedApps.observe(viewLifecycleOwner, {
                 installedAppAdapter.submitList(it)
             })
