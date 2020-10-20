@@ -14,21 +14,24 @@
             type="com.example.denlauncher.model.InstalledApp" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.example.denlauncher.ui.main.InstalledAppItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.onClicked(installedApp, context)}">
+        android:focusable="false">
 
         <TextView
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:onClick="@{() -> viewModel.onClicked(installedApp, context)}"
             android:text="@{installedApp.name}"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.example.denlauncher.ui.main.InstalledAppItemView>
 </layout>
