@@ -1,7 +1,7 @@
 package com.example.denlauncher.model
 
 import android.content.Context
-import android.content.pm.ApplicationInfo
+import android.content.Intent
 
 object InstalledApps {
     private val modelEventListeners: MutableList<ModelEventListener> = mutableListOf()
@@ -17,12 +17,13 @@ object InstalledApps {
     }
 
     fun updateList(context: Context) {
-        apps = context.packageManager.getInstalledPackages(0).filter {
-            it.applicationInfo.flags != ApplicationInfo.FLAG_SYSTEM
-        }.map {
+        val intent = Intent(Intent.ACTION_MAIN, null).apply {
+            addCategory(Intent.CATEGORY_LAUNCHER)
+        }
+        apps = context.packageManager.queryIntentActivities(intent, 0).map {
             InstalledApp(
-                it.applicationInfo.loadLabel(context.packageManager).toString(),
-                it.applicationInfo.packageName
+                it.loadLabel(context.packageManager).toString(),
+                it.activityInfo.packageName
             )
         }
         notifyData()

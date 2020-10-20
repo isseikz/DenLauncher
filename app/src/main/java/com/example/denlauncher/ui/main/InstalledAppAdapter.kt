@@ -38,11 +38,12 @@ class InstalledAppAdapter(
 
     override fun getItemCount(): Int {
         val count = super.getItemCount()
-        return if (count > 5) {
-            5
-        } else {
-            count
-        }
+        return count
+//        return if (count > 5) {
+//            5
+//        } else {
+//            count
+//        }
     }
 
     class AppNameViewHolder(
