@@ -31,6 +31,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/ip_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="32dp"
+            android:focusable="false"
+            android:text="@={viewModel.ipAddress}"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/installed_apps"
             android:layout_width="wrap_content"
