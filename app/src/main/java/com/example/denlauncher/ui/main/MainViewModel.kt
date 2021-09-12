@@ -1,6 +1,7 @@
 package com.example.denlauncher.ui.main
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.denlauncher.MainApplication
@@ -52,6 +53,10 @@ class MainViewModel : ViewModel() {
         super.onCleared()
         Time.unregister(timeModelListener)
         InstalledApps.unregister(appListListener)
+    }
+
+    fun onClicked(context: Context) {
+        context.startActivity(Intent(android.provider.Settings.ACTION_SETTINGS))
     }
 
     fun onClicked(app: InstalledApp, context: Context) {

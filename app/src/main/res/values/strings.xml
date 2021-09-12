@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DenLauncher</string>
+    <string name="system_settings">System settings</string>
 </resources>
