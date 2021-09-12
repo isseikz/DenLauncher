@@ -1,0 +1,12 @@
+@startuml
+
+class MainFragment
+class MainViewModel
+MainFragment --> MainViewModel
+
+class Time
+class TimeReceiver
+
+Time --> TimeReceiver
+
+@enduml
